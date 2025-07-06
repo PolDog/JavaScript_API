@@ -1,0 +1,28 @@
+* {
+	padding: 0;
+	margin: 0;
+}
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.info {
+	display: flex;
+	gap: 10px;
+}
+.sessionItem {
+	padding-top: 10px;
+	align-items: center;
+	margin: 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+}
+.buttonBlock {
+	display: flex;
+	flex-direction: row;
+}
+.btn {
+	width: 150px;
+}
