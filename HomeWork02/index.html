@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<link rel="stylesheet" href="ex1.css" />
+	</head>
+	<body>
+		<div class="main">
+			<div class="container">
+				<button class="prevBtn btn">Предыдущее изображение</button>
+				<img class="currentImage" alt="img" />
+				<button class="nextBtn btn">Следующее изображение</button>
+			</div>
+			<ul class="navigation"></ul>
+		</div>
+		<script>
+			const images = [
+				"./img/product0.png",
+				"./img/product1.png",
+				"./img/product2.png",
+				"./img/product3.png",
+				"./img/product4.png",
+				"./img/product5.png",
+				"./img/product6.png",
+				"./img/product7.png",
+				"./img/product8.png",
+				"./img/product9.png",
+			];
+			const navigationEl = document.querySelector(".navigation");
+			const prevBtn = document.querySelector(".prevBtn");
+			const nextBtn = document.querySelector(".nextBtn");
+			const currentImage = document.querySelector(".currentImage");
+
+			let imageIndex = 0;
+
+			prevBtn.addEventListener("click", function (e) {
+				if (imageIndex != 0) {
+					imageIndex -= 1;
+				} else {
+					imageIndex = images.length - 1;
+				}
+				setImage(imageIndex);
+			});
+			nextBtn.addEventListener("click", function (e) {
+				if (imageIndex != images.length - 1) {
+					imageIndex += 1;
+				} else {
+					imageIndex = 0;
+				}
+				setImage(imageIndex);
+			});
+
+			for (let index = 0; index < images.length; index++) {
+				const image = images[index];
+				const point = document.createElement("div");
+				point.classList.add("point");
+				point.setAttribute("id", index);
+				navigationEl.append(point);
+			}
+
+			navigationEl.addEventListener("click", function (e) {
+				if (e.target.className === "point") {
+					index = parseInt(e.target.getAttribute("id"));
+					// console.log("set ", index);
+					setImage(index);
+				}
+			});
+
+			function setImage(index) {
+				imageIndex = index;
+				currentImage.src = images[imageIndex];
+				setActiveDot(imageIndex);
+			}
+
+			function setActiveDot(activeIndex) {
+				let navigationPoints = document.querySelectorAll(".point");
+				for (let index = 0; index < navigationPoints.length; index++) {
+					const point = navigationPoints[index];
+					console.log(point);
+					if (parseInt(point.getAttribute("id")) == activeIndex) {
+						console.log("+");
+						point.classList.add("active");
+					} else {
+						point.classList.remove("active");
+					}
+				}
+			}
+			setImage(imageIndex);
+		</script>
+	</body>
+</html>
